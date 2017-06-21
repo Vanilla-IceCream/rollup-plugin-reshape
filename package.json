@@ -1,0 +1,38 @@
+{
+  "name": "rollup-plugin-reshape",
+  "version": "1.0.0",
+  "description": "Seamless integration between Rollup and Reshape.",
+  "main": "dist/rollup-plugin-posthtml-template.cjs.js",
+  "module": "dist/rollup-plugin-posthtml-template.es.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "build": "rollup -c",
+    "example": "cd example && rollup -c && lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vanilla-IceCream/rollup-plugin-reshape.git"
+  },
+  "keywords": [
+    "Rollup",
+    "PostHTML"
+  ],
+  "author": "Vanilla IceCream",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vanilla-IceCream/rollup-plugin-reshape/issues"
+  },
+  "homepage": "https://github.com/Vanilla-IceCream/rollup-plugin-reshape#readme",
+  "dependencies": {
+    "reshape": "^0.4.1",
+    "rollup-pluginutils": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-preset-latest": "^6.24.1",
+    "jest": "^20.0.4",
+    "regenerator-runtime": "^0.10.5",
+    "rollup": "^0.43.0",
+    "rollup-plugin-buble": "^0.15.0"
+  }
+}
