@@ -1,21 +1,23 @@
 import { createFilter } from 'rollup-pluginutils';
 import reshape from 'reshape';
 
-export default function(options = {}) {
-  if (!options.include) options.include = '**/*.{html,sgr}';
+var index = function(options) {
+  if ( options === void 0 ) options = {};
 
-  const filter = createFilter(options.include, options.exclude);
+  if (!options.include) { options.include = '**/*.{html,sgr}'; }
+
+  var filter = createFilter(options.include, options.exclude);
 
   return {
     name: 'reshape',
-    transform(code, id) {
-      if (!filter(id)) return;
+    transform: function transform(code, id) {
+      if (!filter(id)) { return; }
 
       return reshape(options.plugins || [])
         .process(code)
-        .then(result => {
+        .then(function (result) {
           return {
-            code: `export default ${JSON.stringify(result.output())}`,
+            code: ("export default " + (JSON.stringify(result.output()))),
             map: { mappings: '' }
           };
           // if (result.dependencies) {
@@ -34,4 +36,7 @@ export default function(options = {}) {
         });
     }
   };
-}
+};
+
+export default index;
+//# sourceMappingURL=rollup-plugin-reshape.es.js.map

@@ -1,21 +1,27 @@
-import { createFilter } from 'rollup-pluginutils';
-import reshape from 'reshape';
+'use strict';
 
-export default function(options = {}) {
-  if (!options.include) options.include = '**/*.{html,sgr}';
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-  const filter = createFilter(options.include, options.exclude);
+var rollupPluginutils = require('rollup-pluginutils');
+var reshape = _interopDefault(require('reshape'));
+
+var index = function(options) {
+  if ( options === void 0 ) options = {};
+
+  if (!options.include) { options.include = '**/*.{html,sgr}'; }
+
+  var filter = rollupPluginutils.createFilter(options.include, options.exclude);
 
   return {
     name: 'reshape',
-    transform(code, id) {
-      if (!filter(id)) return;
+    transform: function transform(code, id) {
+      if (!filter(id)) { return; }
 
       return reshape(options.plugins || [])
         .process(code)
-        .then(result => {
+        .then(function (result) {
           return {
-            code: `export default ${JSON.stringify(result.output())}`,
+            code: ("export default " + (JSON.stringify(result.output()))),
             map: { mappings: '' }
           };
           // if (result.dependencies) {
@@ -34,4 +40,7 @@ export default function(options = {}) {
         });
     }
   };
-}
+};
+
+module.exports = index;
+//# sourceMappingURL=rollup-plugin-reshape.cjs.js.map
