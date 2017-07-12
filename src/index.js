@@ -13,8 +13,12 @@ export default function(options = {}) {
 
       return reshape({
           plugins: options.plugins || [],
-          parserRules: options.parserRules || [],
-          dependencies: options.parserRules || [],
+          parser: options.parser,
+          generator: options.generator,
+          parserOptions: options.parserOptions,
+          generatorOptions: options.generatorOptions,
+          runtime: options.runtime || {},
+          filename: options.filename,
         })
         .process(code)
         .then(result => {

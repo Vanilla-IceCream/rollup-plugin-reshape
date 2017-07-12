@@ -24,7 +24,7 @@ describe('rollup-plugin-reshape', () => {
       .then(result => {
         const { map } = result.generate({ format: 'es', sourceMap: true });
         expect(map).toBeDefined();
-        expect(map.file).toBe(null);
+        expect(map.file).toBeNull();
     });
   });
 

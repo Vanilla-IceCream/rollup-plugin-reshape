@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-reshape",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Seamless integration between Rollup and Reshape.",
   "main": "dist/rollup-plugin-reshape.cjs.js",
   "module": "dist/rollup-plugin-reshape.es.js",
