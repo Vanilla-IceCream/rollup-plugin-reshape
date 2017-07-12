@@ -13,7 +13,11 @@ var index = function(options) {
     transform: function transform(code, id) {
       if (!filter(id)) { return; }
 
-      return reshape(options.plugins || [])
+      return reshape({
+          plugins: options.plugins || [],
+          parserRules: options.parserRules || [],
+          dependencies: options.parserRules || [],
+        })
         .process(code)
         .then(function (result) {
           return {

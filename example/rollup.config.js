@@ -2,7 +2,7 @@ import { join } from 'path';
 
 const reshape = require('../');
 
-// import include from 'reshape-include';
+import include from 'reshape-include';
 
 export default {
   entry: join(__dirname, 'main.js'),
@@ -10,7 +10,7 @@ export default {
   format: 'iife',
   plugins: [
     reshape({
-      // plugins: [include()],
+      plugins: [include()],
     })
   ]
 };
