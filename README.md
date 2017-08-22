@@ -12,7 +12,7 @@ $ npm i rollup-plugin-reshape -D
 
 ```js
 import { join } from 'path';
-import reshape from 'reshape';
+import reshape from 'rollup-plugin-reshape';
 import include from 'reshape-include';
 
 export default {
