@@ -7,34 +7,31 @@ import include from 'reshape-include';
 
 process.chdir(__dirname);
 
-const bundler = (entry, options) => rollup({ entry, plugins: [reshape(options)] });
+const bundler = (input, options = {}) => rollup({ input, plugins: [reshape(options)] });
 
 describe('rollup-plugin-reshape', () => {
-  it('should import html from file as string', () => {
-    return bundler('fixtures/basic/main.js')
-      .then(result => {
-        const { code } = result.generate({ format: 'iife', moduleName: 'reshape' });
-        expect(code).toBeDefined();
-        expect(code).toMatch(/<p>Foo<\/p>/);
-    });
+  it('should import html from file as string', async () => {
+    const { generate } = await bundler('fixtures/basic/main.js');
+    const { code } = await generate({ format: 'iife', name: 'reshape' });
+
+    expect(code).toBeDefined();
+    expect(code).toMatch(/<p>Foo<\/p>/);
   });
 
-  it('should output empty sourcemap', () => {
-    return bundler('fixtures/basic/main.js')
-      .then(result => {
-        const { map } = result.generate({ format: 'es', sourceMap: true });
-        expect(map).toBeDefined();
-        expect(map.file).toBeNull();
-    });
+  it('should output empty sourcemap', async () => {
+    const { generate } = await bundler('fixtures/basic/main.js');
+    const { map } = await generate({ format: 'es', sourcemap: true });
+
+    expect(map).toBeDefined();
+    expect(map.file).toBeNull();
   });
 
-  it('should be able to use the plugins option', () => {
-    return bundler('fixtures/plugins/main.js', { plugins: [include()] })
-      .then(result => {
-        const { code } = result.generate({ format: 'iife', moduleName: 'reshape' });
-        expect(code).toBeDefined();
-        expect(code).toMatch(/<p>Foo<\/p>/);
-        expect(code).toMatch(/<p>Bar<\/p>/);
-    });
+  it('should be able to use the plugins option', async () => {
+    const { generate } = await bundler('fixtures/plugins/main.js', { plugins: [include()] });
+    const { code } = await generate({ format: 'iife', name: 'reshape' });
+
+    expect(code).toBeDefined();
+    expect(code).toMatch(/<p>Foo<\/p>/);
+    expect(code).toMatch(/<p>Bar<\/p>/);
   });
 });
